@@ -1,0 +1,90 @@
+# ==========================================
+# 1. Game Files & Reverse Engineering Dumps
+# (Prevents accidental upload of copyrighted assets)
+# ==========================================
+extracted_cs/
+extracted_isil/
+cpp2il_out/
+*dump*/
+*.apk
+*.apkm
+*.xapk
+*.obb
+*.ipa
+*.exe
+*.dll
+*.so
+*.dat
+global-metadata.dat
+GameAssembly.*
+UnityPlayer.*
+Volzerk*/
+
+# Network Captures & Logs
+*.har
+*.saz
+*.pcap
+*.pcapng
+*.mitm
+
+# ==========================================
+# 2. Local Server Data & Secrets
+# ==========================================
+.env
+.env.*
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+user_data/
+saves/
+backups/
+
+# ==========================================
+# 3. Python (Server & Patch Scripts)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Testing & Linting Caches
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================================
+# 4. IDEs, Editors & OS Files
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
