@@ -1,4 +1,6 @@
 """Handlers for /api/data/load (the large switch on Type=N)."""
+from serverfiles.types.classes.CPlayableCharacterModel import CPlayableCharacterModel
+
 from .. import skel
 from ..config import MOCK_CHARACTER_ID
 from ..responses import mock_character, mock_character_profile
@@ -26,34 +28,6 @@ from serverfiles.types.enums.EElementalType import EElementalType
 
 def _data_load(q, b):
     DataLoadResponse: CDataLoadResponse = CDataLoadResponse()
-    DataLoadResponse.m_DataSet = CFixedDataSetModel()
-    DataLoadResponse.m_DataSet.m_arrWeapons = []
-    DataLoadResponse.m_DataSet.m_arrAccessoryModel = []
-    DataLoadResponse.m_DataSet.m_arrMountMonsterModel = []
-    DataLoadResponse.m_DataSet.m_arrOptionsMonsterModel = []
-    DataLoadResponse.m_DataSet.m_arrMaterialModel = []
-    DataLoadResponse.m_DataSet.m_arrUtilityTickets = []
-    DataLoadResponse.m_DataSet.m_arrPlayableCharacterModel = []
-    DataLoadResponse.m_DataSet.m_arrStampModel = []
-    DataLoadResponse.m_DataSet.m_arrQuestOnlyItemModel = []
-    DataLoadResponse.m_DataSet.m_arrEmblemModel = []
-    DataLoadResponse.m_DataSet.m_arrMountMonsterEggModel = []
-    DataLoadResponse.m_DataSet.m_arrFarmBuildingModel = []
-    DataLoadResponse.m_DataSet.m_arrItemRecipeModel = []
-    DataLoadResponse.m_DataSet.m_arrMonsterModel = []
-    DataLoadResponse.m_DataSet.m_arrCharacterModel = []
-    DataLoadResponse.m_DataSet.m_arrCharacterProfileModel = []
-    DataLoadResponse.m_DataSet.m_arrPlayerSkillModel = []
-    DataLoadResponse.m_DataSet.m_arrPlayerTapSkillModel = []
-    DataLoadResponse.m_DataSet.m_arrPlayerStepSkillModel = []
-    DataLoadResponse.m_DataSet.m_arrOptionMonsterSkillModel = []
-    DataLoadResponse.m_DataSet.m_arrPassiveSkillModel = []
-    DataLoadResponse.m_DataSet.m_arrFarmBuildingUpgradeModel = []
-    DataLoadResponse.m_DataSet.m_arrHateModel = []
-    DataLoadResponse.m_DataSet.m_arrBulletModel = []
-    DataLoadResponse.m_DataSet.m_MasterPartialDataModel = CMasterPartialDataModel()
-    DataLoadResponse.m_DataSet.m_MasterPartialDataModel.m_iId = 0
-    DataLoadResponse.m_DataSet.m_MasterPartialDataModel.m_LastOriginalRankingQuestScheduleEndAt = Timestamp(seconds=int(time.time()))
 
     d = skel.default("DataLoadResponse")
     s = d["dataSet"]
@@ -62,57 +36,80 @@ def _data_load(q, b):
         WeaponModel: CWeaponModel = CWeaponModel()
         WeaponModel.m_iWeaponID = 1
         WeaponModel.m_szWeaponName = "Mock Weapon"
-        WeaponModel.m_eRarity = ERarity.Star0
-        WeaponModel.m_eSubRarity = ERarity.Star0
         WeaponModel.m_szDescription = "Mock Description"
         WeaponModel.m_eWeaponType = EWeaponType.Sword
         WeaponModel.m_eWeaponUse = EWeaponUse.Default
-        WeaponModel.m_iAttackPower = 0
-        WeaponModel.m_iElementalPoint = 0
         WeaponModel.m_eElementalType = EElementalType.Fire
-        WeaponModel.m_arrPassiveSkillIds = []
-        WeaponModel.m_iPrice = 0
-        WeaponModel.m_iMinPrice = 0
-        WeaponModel.m_iMaxPrice = 0
         WeaponModel.m_iModelId = 220002
-        WeaponModel.m_iColorId = 0
-        WeaponModel.m_iShaderId = 0
 
         DataLoadResponse.m_DataSet.m_arrWeapons.append(WeaponModel)
         d = DataLoadResponse.toJSON()
 
-    elif "Type=3&" in q: # Refactor to class not working
-        mm = skel.default("MountMonsterModel")
-        mm.update(
-            mountMonsterId=1, name="Mock", monsterId=1, rarity=1,
-            mountType=1, sequenceId=1, grade=1, isDefault=True,
-            hateId=1, playerSkill1Id=1,
-            baseHp=100, baseSp=100, baseAttack=10,
-            basePhysicalDefense=10, baseMagicalDefense=10,
-        )
-        s["mountMonsters"] = [mm]
+    elif "Type=3&" in q:
+        MountMonsterModel: CMountMonsterModel = CMountMonsterModel()
+        MountMonsterModel.m_iMountMonsterId = 1
+        MountMonsterModel.m_szName = "Mock"
+        MountMonsterModel.m_iMonsterId = 1
+        MountMonsterModel.m_eMountType = EMountType.Strike
+        MountMonsterModel.m_bIsDefault = True
+        MountMonsterModel.m_iGrade = 1
+        MountMonsterModel.m_iSequenceId = 1
+        MountMonsterModel.m_iBaseHp = 100
+        MountMonsterModel.m_iBaseSp = 100
+        MountMonsterModel.m_iBaseAttack = 10
+        MountMonsterModel.m_iBasePhysicalDefense = 10
+        MountMonsterModel.m_iBaseMagicalDefense = 10
+        MountMonsterModel.m_iHateId = 1
+        MountMonsterModel.m_iPlayerSkill1Id = 1
+        DataLoadResponse.m_DataSet.m_arrMountMonsterModel.append(MountMonsterModel)
+        d = DataLoadResponse.toJSON()
     
     elif ("type=9" in q or "Type=9" in q or q.startswith("9")):
-        pc = skel.default("PlayableCharacterModel")
-        pc.update(
-            playableCharacterId=1,
-            characterId=MOCK_CHARACTER_ID,
-            rarity=1,
-            mountType=1,
-            playerSkillId=1,
-            extremeSkillId=1,
-            hateId=1,
-            defaultPlayerSkillLevel=1,
-            minHp=100, midHp=100, maxHp=100,
-            minSp=100, midSp=100, maxSp=100,
-            minAttack=10, midAttack=10, maxAttack=10,
-        )
-        s["playableCharacters"] = [pc]
+        PlayableCharacterModel: CPlayableCharacterModel = CPlayableCharacterModel()
+        PlayableCharacterModel.m_iPlayableCharacterId = 1
+        PlayableCharacterModel.m_iCharacterId = MOCK_CHARACTER_ID
+        PlayableCharacterModel.m_eMountType = EMountType.Strike
+        PlayableCharacterModel.m_iHateId = 1
+        PlayableCharacterModel.m_iExtremeSkillId = 1
+        PlayableCharacterModel.m_iPlayerSkillId = 1
+        PlayableCharacterModel.m_iDefaultPlayerSkillLevel = 1
+        PlayableCharacterModel.m_iMinHp = 100
+        PlayableCharacterModel.m_iMidHp = 100
+        PlayableCharacterModel.m_iMaxHp = 100
+        PlayableCharacterModel.m_iMinSp = 100
+        PlayableCharacterModel.m_iMidSp = 100
+        PlayableCharacterModel.m_iMaxSp = 100
+        PlayableCharacterModel.m_iMinAttack = 10
+        PlayableCharacterModel.m_iMidAttack = 10
+        PlayableCharacterModel.m_iMaxAttack = 10
 
-    elif "Type=19&" in q: # Refactor to class not working
-        mo = skel.default("MonsterModel")
-        mo.update(monsterId=1, name="Mock", modelId=1026002, sequenceId=1)
-        s["monsters"] = [mo]
+        DataLoadResponse.m_DataSet.m_arrPlayableCharacterModel.append(PlayableCharacterModel)
+        d = DataLoadResponse.toJSON()
+
+        # pc = skel.default("PlayableCharacterModel")
+        # pc.update(
+        #     playableCharacterId=1,
+        #     characterId=MOCK_CHARACTER_ID,
+        #     rarity=1,
+        #     mountType=1,
+        #     playerSkillId=1,
+        #     extremeSkillId=1,
+        #     hateId=1,
+        #     defaultPlayerSkillLevel=1,
+        #     minHp=100, midHp=100, maxHp=100,
+        #     minSp=100, midSp=100, maxSp=100,
+        #     minAttack=10, midAttack=10, maxAttack=10,
+        # )
+        # s["playableCharacters"] = [pc]
+
+    elif "Type=19&" in q:
+        MonsterModel: CMonsterModel = CMonsterModel()
+        MonsterModel.m_iMonsterId = 1
+        MonsterModel.m_szName = "Mock"
+        MonsterModel.m_iModelId = 1026002
+        MonsterModel.m_iSeqId = 1
+        DataLoadResponse.m_DataSet.m_arrMonsterModel.append(MonsterModel)
+        d = DataLoadResponse.toJSON()
 
     elif "type=20" in q or "Type=20" in q:
         DataLoadResponse.m_DataSet.m_arrCharacterModel.append(mock_character())
@@ -144,7 +141,7 @@ def _data_load(q, b):
         st.update(playerStepSkillId=1, mountType=1, type=1, playerSkillId=1)
         s["playerStepSkills"] = [st]
 
-    elif "Type=26&" in q:
+    elif "Type=26&" in q: # passiveSkills
         d = DataLoadResponse.toJSON()
 
     elif "Type=28&" in q:
@@ -152,7 +149,7 @@ def _data_load(q, b):
         h.update(hateId=1, description="Mock", basePoint=100)
         s["hates"] = [h]
 
-    elif "Type=29&" in q:
+    elif "Type=29&" in q: # bullets
         d = DataLoadResponse.toJSON()
 
     return d
