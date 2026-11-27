@@ -7,8 +7,8 @@ from serverfiles.types.classes.COptionMonsterAiModel import COptionMonsterAiMode
 
 class COptionMonsterModel(CTypeImplBaseClass):
     m_iOptionMonsterId: int
-    m_strName: str
-    m_iIndex: int
+    m_szName: str
+    m_iIndexNo: int
     m_iMonsterId: int
     m_iIconId: int
     m_eRarity: ERarity
@@ -22,13 +22,13 @@ class COptionMonsterModel(CTypeImplBaseClass):
     m_iBaseEvaluation: int
     m_iOptionMonsterSkillId: int
     m_iHateId: int
-    m_OptionMonsterAiModel: COptionMonsterAiModel
+    m_OptionMonsterAi: COptionMonsterAiModel
 
     def toJSON(self) -> dict[str, Any]:
         return {
             "optionMonsterId": self.m_iOptionMonsterId,
-            "name": self.m_strName,
-            "index": self.m_iIndex,
+            "name": self.m_szName,
+            "indexNo": self.m_iIndexNo,
             "monsterId": self.m_iMonsterId,
             "iconId": self.m_iIconId,
             "rarity": self.m_eRarity.value,
@@ -42,5 +42,5 @@ class COptionMonsterModel(CTypeImplBaseClass):
             "baseEvaluation": self.m_iBaseEvaluation,
             "optionMonsterSkillId": self.m_iOptionMonsterSkillId,
             "hateId": self.m_iHateId,
-            "optionMonsterAiModel": self.m_OptionMonsterAiModel.toJSON()
+            "optionMonsterAi": self.m_OptionMonsterAi.toJSON()
         }

@@ -1,14 +1,25 @@
 """Handlers for /api/monster-index/* endpoints."""
 from serverfiles import skel
 
+from serverfiles.types.classes.CMonsterDescriptionModel import CMonsterDescriptionModel
+from serverfiles.types.classes.COptionMonsterAiModel import COptionMonsterAiModel
+from serverfiles.types.classes.CMonsterModel import CMonsterModel
 from serverfiles.types.classes.CCommonResourceModel import CCommonResourceModel
 from serverfiles.types.classes.CMonsterIndexOptionMonsterResponse import CMonsterIndexOptionMonsterResponse
 from serverfiles.types.classes.CMonsterThumbnailModel import CMonsterThumbnailModel
+from serverfiles.types.classes.COptionMonsterModel import COptionMonsterModel
+from serverfiles.types.classes.COptionMonsterSkillModel import COptionMonsterSkillModel
 from serverfiles.types.classes.COptionMonsterThumbnailModel import COptionMonsterThumbnailModel
-
+from serverfiles.types.classes.CMonsterIndexOptionMonsterDetailResponse import CMonsterIndexOptionMonsterDetailResponse
+from serverfiles.types.enums.EAttackType import EAttackType
+from serverfiles.types.enums.EMonsterSpecies import EMonsterSpecies
+from serverfiles.types.enums.EMonsterVoiceCategory import EMonsterVoiceCategory
+from serverfiles.types.enums.EMonsterCategory import EMonsterCategory
 from serverfiles.types.enums.EMonsterIndexStatus import EMonsterIndexStatus
 from serverfiles.types.enums.EOptionMonsterRole import EOptionMonsterRole
 from serverfiles.types.enums.EElementalType import EElementalType
+from serverfiles.types.enums.ERarity import ERarity
+from serverfiles.types.enums.EDeformedHeroineIconType import EDeformedHeroineIconType
 
 from . import register
 
@@ -94,8 +105,8 @@ def mountMonsterDetail(q, b):
 # Req body: {}
 def optionMonster(q, b):
     commonResource: CCommonResourceModel = CCommonResourceModel()
-    commonResource.m_SubNotifications = []
-    commonResource.m_Badges = []
+    commonResource.m_arrSubNotifications = []
+    commonResource.m_arrBadges = []
 
     monsterThumbnail = CMonsterThumbnailModel()
     monsterThumbnail.m_iMonsterId = 101001610
@@ -115,39 +126,96 @@ def optionMonster(q, b):
 
     optionMonsterResponse = CMonsterIndexOptionMonsterResponse()
     optionMonsterResponse.m_CommonResource = commonResource
-    optionMonsterResponse.m_Thumbnails = thumbnails
+    optionMonsterResponse.m_arrThumbnails = thumbnails
 
     return optionMonsterResponse.toJSON()
 
 # Req body: {"optionMonsterId": <long>}
 def optionMonsterDetail(q, b):
-    OptionMonsterModel = skel.default("OptionMonsterModel")
-    OptionMonsterModel["optionMonsterId"] = 101001610
-    OptionMonsterModel["name"] = "MockOptionMonster"
-    OptionMonsterModel["indexNo"] = 1
-    OptionMonsterModel["monsterId"] = 101001610
-    OptionMonsterModel["iconId"] = 101001610
-    OptionMonsterModel["role"] = 1
+    commonResource: CCommonResourceModel = CCommonResourceModel()
+    commonResource.m_arrSubNotifications = []
+    commonResource.m_arrBadges = []
 
-    OptionMonsterModel["scaleFactor"] = 1
-    OptionMonsterModel["radius"] = 1
+    OptionMonsterAi: COptionMonsterAiModel = COptionMonsterAiModel()
+    OptionMonsterAi.m_iOptionMonsterAiId = 0
+    OptionMonsterAi.m_iAiId = 0
+    OptionMonsterAi.m_iBattleRange = 0
+    OptionMonsterAi.m_iSearchRange = 0
+    OptionMonsterAi.m_iPersonalSpace = 0
+    OptionMonsterAi.m_iFOV = 0
 
-    MonsterModel = skel.default("MonsterModel")
-    MonsterModel["name"] = "MockMonster"
-    MonsterModel["monsterId"] = 101001610
-    MonsterModel["modelId"] = 101001610
-    MonsterModel["motionId"] = 300800110 # assets/app/external/character/enemy/animation/en_300800110_motion_list.asset
-    MonsterModel["sequenceId"] = 301500111 # assets/app/external/character/enemy/sequence/en_301500111_seq_list.asset
+    OptionMonsterModel: COptionMonsterModel = COptionMonsterModel()
+    OptionMonsterModel.m_iOptionMonsterId = 101001610
+    OptionMonsterModel.m_szName = "MockOptionMonster"
+    OptionMonsterModel.m_iIndexNo = 1
+    OptionMonsterModel.m_iMonsterId = 101001610
+    OptionMonsterModel.m_iIconId = 101001610
+    OptionMonsterModel.m_eRarity = ERarity.Star0
+    OptionMonsterModel.m_flRadius = 1
+    OptionMonsterModel.m_flScaleFactor = 1
+    OptionMonsterModel.m_eRole = EOptionMonsterRole.Attacker
+    OptionMonsterModel.m_iPrice = 0
+    OptionMonsterModel.m_iBaseAttack = 0
+    OptionMonsterModel.m_eElementalType = EElementalType.Fire
+    OptionMonsterModel.m_iBaseElementalPoint = 0
+    OptionMonsterModel.m_iBaseEvaluation = 0
+    OptionMonsterModel.m_iOptionMonsterSkillId = 0
+    OptionMonsterModel.m_iHateId = 0
+    OptionMonsterModel.m_OptionMonsterAi = OptionMonsterAi
 
-    MonsterIndexOptionMonsterDetailResponse = skel.default("MonsterIndexOptionMonsterDetailResponse")
-    MonsterIndexOptionMonsterDetailResponse["optionMonster"] = OptionMonsterModel
-    MonsterIndexOptionMonsterDetailResponse["monster"] = MonsterModel
-    MonsterIndexOptionMonsterDetailResponse["commonResource"] = {
-        "subNotifications": [],
-        "badges": []
-    }
+    MonsterModel: CMonsterModel = CMonsterModel()
+    MonsterModel.m_iMonsterId = 101001610
+    MonsterModel.m_szName = "MockMonster"
+    MonsterModel.m_iEvolutionStep = 0
+    MonsterModel.m_iBlowRate = 0
+    MonsterModel.m_eMonsterCategory = EMonsterCategory.Normal
+    MonsterModel.m_eMonsterSpecies = EMonsterSpecies.None_
+    MonsterModel.m_eMonsterVoiceCategory = EMonsterVoiceCategory.None_
+    MonsterModel.m_iModelId = 101001610
+    MonsterModel.m_iMotionId = 300800110 # assets/app/external/character/enemy/animation/en_300800110_motion_list.asset
+    MonsterModel.m_iSeqId = 301500111 # assets/app/external/character/enemy/sequence/en_301500111_seq_list.asset
 
-    return MonsterIndexOptionMonsterDetailResponse
+    MonsterDescriptionModel: CMonsterDescriptionModel = CMonsterDescriptionModel()
+    MonsterDescriptionModel.m_szText = "Mock description"
+    MonsterDescriptionModel.m_eIconType = EDeformedHeroineIconType.Reserve1
+    MonsterDescriptionModel.m_bIsLocked = False
+
+    OptionMonsterSkill: COptionMonsterSkillModel = COptionMonsterSkillModel()
+    OptionMonsterSkill.m_iOptionMonsterSkillId = 0
+    OptionMonsterSkill.m_szName = "Mock Skill"
+    OptionMonsterSkill.m_szDescription = "Mock Skill Description"
+    OptionMonsterSkill.m_eAttackType = EAttackType.None_
+    OptionMonsterSkill.m_iRange = 0
+    OptionMonsterSkill.m_arrOptionMonsterSkillStatusModel = []
+    OptionMonsterSkill.m_iWincePoint = 0
+    OptionMonsterSkill.m_eElementalType1 = EElementalType.None_
+    OptionMonsterSkill.m_eElementalType2 = EElementalType.None_
+    OptionMonsterSkill.m_eElementalType3 = EElementalType.None_
+    OptionMonsterSkill.m_iAttackId = 0
+    OptionMonsterSkill.m_arrAttackActionId = []
+    OptionMonsterSkill.m_arrAdditionalEffectIds = []
+    OptionMonsterSkill.m_arrBulletId = []
+    OptionMonsterSkill.m_arrNoVanishmentAttackIds = []
+    OptionMonsterSkill.m_iBaseMaxCharge = 0
+    OptionMonsterSkill.m_iBaseBreakPoint = 0
+    OptionMonsterSkill.m_iBaseAttackPower = 0
+    OptionMonsterSkill.m_iBaseElementalPower1 = 0
+    OptionMonsterSkill.m_iBaseElementalPower2 = 0
+    OptionMonsterSkill.m_iBaseElementalPower3 = 0
+    OptionMonsterSkill.m_iBaseCoolTime = 0
+    OptionMonsterSkill.m_arrAdditionalEffectBaseValues = []
+    OptionMonsterSkill.m_arrAdditionalEffectBaseDurations = []
+    OptionMonsterSkill.m_flBaseVanishWaitTime = 0.0
+
+    MonsterIndexOptionMonsterDetailResponse: CMonsterIndexOptionMonsterDetailResponse = CMonsterIndexOptionMonsterDetailResponse()
+    MonsterIndexOptionMonsterDetailResponse.m_OptionMonster = OptionMonsterModel
+    MonsterIndexOptionMonsterDetailResponse.m_Monster = MonsterModel
+    MonsterIndexOptionMonsterDetailResponse.m_CommonResource = commonResource
+    MonsterIndexOptionMonsterDetailResponse.m_arrDropQuests = []
+    MonsterIndexOptionMonsterDetailResponse.m_Description = MonsterDescriptionModel
+    MonsterIndexOptionMonsterDetailResponse.m_OptionMonsterSkill = OptionMonsterSkill
+
+    return MonsterIndexOptionMonsterDetailResponse.toJSON()
 
 register("/api/monster-index/top", _monsterIndex_top)
 

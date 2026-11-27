@@ -4,9 +4,9 @@ from serverfiles.types.classes.CModel import CModel
 from serverfiles.types.classes.COptionMonsterThumbnailModel import COptionMonsterThumbnailModel
 
 class CMonsterIndexOptionMonsterResponse(CModel):
-    m_Thumbnails: list[COptionMonsterThumbnailModel]
+    m_arrThumbnails: list[COptionMonsterThumbnailModel]
 
     def toJSON(self) -> dict[str, Any]:
         return {
-            "thumbnails": [thumbnail.toJSON() for thumbnail in self.m_Thumbnails]
+            "thumbnails": [thumbnail.toJSON() for thumbnail in self.m_arrThumbnails]
         }

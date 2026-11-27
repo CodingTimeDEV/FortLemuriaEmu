@@ -5,11 +5,11 @@ from serverfiles.types.classes.CBadgeModel import CBadgeModel
 
 
 class CCommonResourceModel(CTypeImplBaseClass):
-    m_SubNotifications: list[CSubNotificationModel]
-    m_Badges: list[CBadgeModel]
+    m_arrSubNotifications: list[CSubNotificationModel]
+    m_arrBadges: list[CBadgeModel]
 
     def toJSON(self) -> dict[str, Any]:
         return {
-            "subNotifications": [sn.toJSON() for sn in self.m_SubNotifications],
-            "badges": [badge.toJSON() for badge in self.m_Badges]
+            "subNotifications": [sn.toJSON() for sn in self.m_arrSubNotifications],
+            "badges": [badge.toJSON() for badge in self.m_arrBadges]
         }
