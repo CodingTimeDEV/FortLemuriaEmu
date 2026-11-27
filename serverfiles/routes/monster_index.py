@@ -1,7 +1,9 @@
 """Handlers for /api/monster-index/* endpoints."""
 from serverfiles import skel
 
+from serverfiles.types.classes.CMountMonsterThumbnailModel import CMountMonsterThumbnailModel
 from serverfiles.types.classes.CMonsterDescriptionModel import CMonsterDescriptionModel
+from serverfiles.types.classes.CMonsterIndexMountMonsterResponse import CMonsterIndexMountMonsterResponse
 from serverfiles.types.classes.COptionMonsterAiModel import COptionMonsterAiModel
 from serverfiles.types.classes.CMonsterModel import CMonsterModel
 from serverfiles.types.classes.CCommonResourceModel import CCommonResourceModel
@@ -11,11 +13,13 @@ from serverfiles.types.classes.COptionMonsterModel import COptionMonsterModel
 from serverfiles.types.classes.COptionMonsterSkillModel import COptionMonsterSkillModel
 from serverfiles.types.classes.COptionMonsterThumbnailModel import COptionMonsterThumbnailModel
 from serverfiles.types.classes.CMonsterIndexOptionMonsterDetailResponse import CMonsterIndexOptionMonsterDetailResponse
+
 from serverfiles.types.enums.EAttackType import EAttackType
 from serverfiles.types.enums.EMonsterSpecies import EMonsterSpecies
 from serverfiles.types.enums.EMonsterVoiceCategory import EMonsterVoiceCategory
 from serverfiles.types.enums.EMonsterCategory import EMonsterCategory
 from serverfiles.types.enums.EMonsterIndexStatus import EMonsterIndexStatus
+from serverfiles.types.enums.EMountType import EMountType
 from serverfiles.types.enums.EOptionMonsterRole import EOptionMonsterRole
 from serverfiles.types.enums.EElementalType import EElementalType
 from serverfiles.types.enums.ERarity import ERarity
@@ -41,29 +45,31 @@ def _monsterIndex_top(q, b):
 
 # Req body: {}
 def mountMonster(q, b):
-    return {
-        "commonResource":{
-                    "subNotifications":[],
-                    "badges":[]
-        },
-        "thumbnails": [ # Array of "MonsterThumbnailModel : Model, IHasNameSortStrategyValue, IHasMonsterIndexStatus"
-            {
-                "indexNo": 1, # Derived
-                "mountMonsterId": 1000001, # Derived
-                "rarity": 1, # Derived
-                "elementalType": 1, # Derived
-                "mountType": 1, # Derived
-                "grade": 1, # Derived
-                "monsterThumbnail": {
-                    "monsterId": 1000001,
-                    "name": "MockMount",
-                    "iconId": 1000001,
-                    "monsterIndexStatus": 4,
-                    "monsterModelId": 1
-                }
-            }
-        ]
-    }
+    CommonResource: CCommonResourceModel = CCommonResourceModel()
+    CommonResource.m_arrSubNotifications = []
+    CommonResource.m_arrBadges = []
+
+    MountMonsterThumbnailModels: list[CMountMonsterThumbnailModel] = []
+    MountMonsterThumbnailModel: CMountMonsterThumbnailModel = CMountMonsterThumbnailModel()
+    MountMonsterThumbnailModel.m_iIndexNo = 1
+    MountMonsterThumbnailModel.m_iMountMonsterId = 1000001
+    MountMonsterThumbnailModel.m_eRarity = ERarity(1)
+    MountMonsterThumbnailModel.m_eElementalType = EElementalType(1)
+    MountMonsterThumbnailModel.m_eMountType = EMountType.None_
+    MountMonsterThumbnailModel.m_iGrade = 1
+    MountMonsterThumbnailModel.m_MonsterThumbnail = CMonsterThumbnailModel()
+    MountMonsterThumbnailModel.m_MonsterThumbnail.m_iMonsterId = 1000001
+    MountMonsterThumbnailModel.m_MonsterThumbnail.m_szName = "MockMount"
+    MountMonsterThumbnailModel.m_MonsterThumbnail.m_iIconId = 1000001
+    MountMonsterThumbnailModel.m_MonsterThumbnail.m_eMonsterIndexStatus = EMonsterIndexStatus(4)
+    MountMonsterThumbnailModel.m_MonsterThumbnail.m_iMonsterModelId = 1
+    MountMonsterThumbnailModels.append(MountMonsterThumbnailModel)
+    
+    MonsterIndexMountMonsterResponse: CMonsterIndexMountMonsterResponse = CMonsterIndexMountMonsterResponse()
+    MonsterIndexMountMonsterResponse.m_CommonResource = CommonResource
+    MonsterIndexMountMonsterResponse.m_arrThumbnails = MountMonsterThumbnailModels
+
+    return MonsterIndexMountMonsterResponse.toJSON()
 
 # Req body: {"mountMonsterId": <long>}
 def mountMonsterDetail(q, b):
