@@ -41,6 +41,9 @@ user_data/
 saves/
 backups/
 
+*.pem
+
+
 # ==========================================
 # 3. Python (Server & Patch Scripts)
 # ==========================================
@@ -77,6 +80,9 @@ ENV/
 htmlcov/
 .mypy_cache/
 .ruff_cache/
+
+skel_cache.json
+users.json
 
 # ==========================================
 # 4. IDEs, Editors & OS Files
