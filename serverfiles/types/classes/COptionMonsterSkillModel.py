@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.enums.EAttackType import EAttackType
 from serverfiles.types.enums.EElementalType import EElementalType
 from serverfiles.types.classes.COptionMonsterSkillStatusModel import COptionMonsterSkillStatusModel
@@ -30,31 +30,31 @@ class COptionMonsterSkillModel:
     m_arrAdditionalEffectBaseDurations: list[int]
     m_flBaseVanishWaitTime: float
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "OptionMonsterSkillId": self.m_iOptionMonsterSkillId,
-            "Name": self.m_szName,
-            "Description": self.m_szDescription,
-            "AttackType": self.m_eAttackType.value,
-            "Range": self.m_iRange,
-            "Statuses": [status.toJSON() for status in self.m_arrOptionMonsterSkillStatusModel],
-            "WincePoint": self.m_iWincePoint,
-            "ElementalType1": self.m_eElementalType1.value,
-            "ElementalType2": self.m_eElementalType2.value,
-            "ElementalType3": self.m_eElementalType3.value,
-            "AttackId": self.m_iAttackId,
-            "AttackActionIds": self.m_arrAttackActionId,
-            "AdditionalEffectIds": self.m_arrAdditionalEffectIds,
-            "BulletIds": self.m_arrBulletId,
-            "NoVanishmentAttackIds": self.m_arrNoVanishmentAttackIds,
-            "BaseMaxCharge": self.m_iBaseMaxCharge,
-            "BaseBreakPoint": self.m_iBaseBreakPoint,
-            "BaseAttackPower": self.m_iBaseAttackPower,
-            "BaseElementalPower1": self.m_iBaseElementalPower1,
-            "BaseElementalPower2": self.m_iBaseElementalPower2,
-            "BaseElementalPower3": self.m_iBaseElementalPower3,
-            "BaseCoolTime": self.m_iBaseCoolTime,
-            "AdditionalEffectBaseValues": self.m_arrAdditionalEffectBaseValues,
-            "AdditionalEffectBaseDurations": self.m_arrAdditionalEffectBaseDurations,
-            "BaseVanishWaitTime": self.m_flBaseVanishWaitTime
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "optionMonsterSkillId": self.m_iOptionMonsterSkillId,
+            "name": self.m_szName,
+            "description": self.m_szDescription,
+            "attackType": self.m_eAttackType.value,
+            "range": self.m_iRange,
+            "statuses": [status.toJSON() for status in self.m_arrOptionMonsterSkillStatusModel],
+            "wincePoint": self.m_iWincePoint,
+            "elementalType1": self.m_eElementalType1.value,
+            "elementalType2": self.m_eElementalType2.value,
+            "elementalType3": self.m_eElementalType3.value,
+            "attackId": self.m_iAttackId,
+            "attackActionIds": self.m_arrAttackActionId,
+            "additionalEffectIds": self.m_arrAdditionalEffectIds,
+            "bulletIds": self.m_arrBulletId,
+            "noVanishmentAttackIds": self.m_arrNoVanishmentAttackIds,
+            "baseMaxCharge": self.m_iBaseMaxCharge,
+            "baseBreakPoint": self.m_iBaseBreakPoint,
+            "baseAttackPower": self.m_iBaseAttackPower,
+            "baseElementalPower1": self.m_iBaseElementalPower1,
+            "baseElementalPower2": self.m_iBaseElementalPower2,
+            "baseElementalPower3": self.m_iBaseElementalPower3,
+            "baseCoolTime": self.m_iBaseCoolTime,
+            "additionalEffectBaseValues": self.m_arrAdditionalEffectBaseValues,
+            "additionalEffectBaseDurations": self.m_arrAdditionalEffectBaseDurations,
+            "baseVanishWaitTime": self.m_flBaseVanishWaitTime
+        }

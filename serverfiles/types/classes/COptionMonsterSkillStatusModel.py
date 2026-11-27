@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
@@ -16,18 +16,18 @@ class COptionMonsterSkillStatusModel(CTypeImplBaseClass):
     m_arrAdditionalEffectValues: list[int]
     m_arrAdditionalEffectDurations: list[int]
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "SkillId": self.m_iSkillId,
-            "LimitBreakStep": self.m_iLimitBreakStep,
-            "MaxCharge": self.m_iMaxCharge,
-            "CoolTime": self.m_iCoolTime,
-            "AttackPower": self.m_iAttackPower,
-            "ElementalPower1": self.m_iElementalPower1,
-            "ElementalPower2": self.m_iElementalPower2,
-            "ElementalPower3": self.m_iElementalPower3,
-            "BreakPoint": self.m_iBreakPoint,
-            "VanishWaitTime": self.m_iVanishWaitTime,
-            "AdditionalEffectValues": self.m_arrAdditionalEffectValues,
-            "AdditionalEffectDurations": self.m_arrAdditionalEffectDurations
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "skillId": self.m_iSkillId,
+            "limitBreakStep": self.m_iLimitBreakStep,
+            "maxCharge": self.m_iMaxCharge,
+            "coolTime": self.m_iCoolTime,
+            "attackPower": self.m_iAttackPower,
+            "elementalPower1": self.m_iElementalPower1,
+            "elementalPower2": self.m_iElementalPower2,
+            "elementalPower3": self.m_iElementalPower3,
+            "breakPoint": self.m_iBreakPoint,
+            "vanishWaitTime": self.m_iVanishWaitTime,
+            "additionalEffectValues": self.m_arrAdditionalEffectValues,
+            "additionalEffectDurations": self.m_arrAdditionalEffectDurations
+        }

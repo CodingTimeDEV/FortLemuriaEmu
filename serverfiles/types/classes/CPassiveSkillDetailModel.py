@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EPassiveSkillType import EPassiveSkillType
 from serverfiles.types.enums.EPassiveSkillTargetType import EPassiveSkillTargetType
@@ -10,11 +10,11 @@ class CPassiveSkillDetailModel(CTypeImplBaseClass):
     m_szDescription: str
     m_szValueWithUnit: str
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "PassiveSkillType": self.m_ePassiveSkillType.value,
-            "PassiveSkillTargetType": self.m_ePassiveSkillTargetType.value,
-            "Values": self.m_iArrValues,
-            "Description": self.m_szDescription,
-            "ValueWithUnit": self.m_szValueWithUnit
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "passiveSkillType": self.m_ePassiveSkillType.value,
+            "passiveSkillTargetType": self.m_ePassiveSkillTargetType.value,
+            "values": self.m_iArrValues,
+            "description": self.m_szDescription,
+            "valueWithUnit": self.m_szValueWithUnit
+        }

@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.enums.ERarity import ERarity
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.classes.CPassiveSkillDetailModel import CPassiveSkillDetailModel
@@ -13,13 +13,13 @@ class CPassiveSkillModel(CTypeImplBaseClass):
     m_arrPassiveSkillDetailModel: list[CPassiveSkillDetailModel]
     m_arrPassiveSkillTriggerModel: list[CPassiveSkillTriggerModel]
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "PassiveSkillID": self.m_iPassiveSkillID,
-            "Name": self.m_szName,
-            "Rarity": self.m_eRarity.name,
-            "SubRarity": self.m_eSubRarity.name,
-            "MaxLevel": self.m_iMaxLevel,
-            "Details": [detail.toJSON() for detail in self.m_arrPassiveSkillDetailModel],
-            "Triggers": [trigger.toJSON() for trigger in self.m_arrPassiveSkillTriggerModel]
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "passiveSkillID": self.m_iPassiveSkillID,
+            "name": self.m_szName,
+            "rarity": self.m_eRarity.name,
+            "subRarity": self.m_eSubRarity.name,
+            "maxLevel": self.m_iMaxLevel,
+            "details": [detail.toJSON() for detail in self.m_arrPassiveSkillDetailModel],
+            "triggers": [trigger.toJSON() for trigger in self.m_arrPassiveSkillTriggerModel]
+        }

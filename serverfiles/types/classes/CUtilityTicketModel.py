@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EUtilityTicketType import EUtilityTicketType
 
@@ -10,12 +10,12 @@ class CUtilityTicketModel(CTypeImplBaseClass):
     m_iDuration: int
     m_iValue: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "UtilityTicketId": self.m_iUtilityTicketId,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "Type": self.m_eUtilityTicketType.value,
-            "Duration": self.m_iDuration,
-            "Value": self.m_iValue
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "utilityTicketId": self.m_iUtilityTicketId,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "type": self.m_eUtilityTicketType.value,
+            "duration": self.m_iDuration,
+            "value": self.m_iValue
+        }

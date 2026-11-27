@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.ERarity import ERarity
 
@@ -12,14 +12,14 @@ class CEmblemModel(CTypeImplBaseClass):
     m_bIsOpenConditionPublic: bool
     m_strOpenCondition: str
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "EmblemId": self.m_iEmblemId,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "Rarity": self.m_eRarity.value,
-            "ImageId": self.m_iImageId,
-            "Text": self.m_strText,
-            "IsOpenConditionPublic": self.m_bIsOpenConditionPublic,
-            "OpenCondition": self.m_strOpenCondition
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "emblemId": self.m_iEmblemId,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "rarity": self.m_eRarity.value,
+            "imageId": self.m_iImageId,
+            "text": self.m_strText,
+            "isOpenConditionPublic": self.m_bIsOpenConditionPublic,
+            "openCondition": self.m_strOpenCondition
+        }

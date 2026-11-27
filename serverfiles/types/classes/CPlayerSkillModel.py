@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EMountType import EMountType
 from serverfiles.types.enums.EComboCommandType import EComboCommandType
@@ -18,16 +18,16 @@ class CPlayerSkillModel(CTypeImplBaseClass):
     m_arrPlayerSkillStatusModel: list[CPlayerSkillStatusModel]
     m_PlayerSkillModule: CPlayerSkillModuleModel
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "PlayerSkillId": self.m_iPlayerSkillId,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "MountType": self.m_eMountType.value,
-            "CommandType": self.m_eComboCommandType.value,
-            "Style": self.m_eSkillStyle.value,
-            "EasyBreakMonsterIds": self.m_arrEasyBreakMonsterIds,
-            "IsAttackSpeedUpEnable": self.m_bIsAttackSpeedUpEnable,
-            "Statuses": [status.toJSON() for status in self.m_arrPlayerSkillStatusModel],
-            "Module": self.m_PlayerSkillModule.toJSON()
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "playerSkillId": self.m_iPlayerSkillId,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "mountType": self.m_eMountType.value,
+            "commandType": self.m_eComboCommandType.value,
+            "style": self.m_eSkillStyle.value,
+            "easyBreakMonsterIds": self.m_arrEasyBreakMonsterIds,
+            "isAttackSpeedUpEnable": self.m_bIsAttackSpeedUpEnable,
+            "statuses": [status.toJSON() for status in self.m_arrPlayerSkillStatusModel],
+            "module": self.m_PlayerSkillModule.toJSON()
+        }

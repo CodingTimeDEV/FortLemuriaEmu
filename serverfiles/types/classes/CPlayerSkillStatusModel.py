@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EElementalType import EElementalType
 
@@ -34,32 +34,32 @@ class CPlayerSkillStatusModel(CTypeImplBaseClass):
     m_arrAdditionalEffectIds: list[int]
     m_arrBulletIds: list[int]
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "StatusId": self.m_iPlayerSkillStatusId,
-            "PlayerSkillId": self.m_iPlayerSkillId,
-            "Rank": self.m_iRank,
-            "ConsumedSp": self.m_iConsumedSp,
-            "RecoveredSp": self.m_iRecoveredSp,
-            "BreakPoint": self.m_iBreakPoint,
-            "MinBreakPoint": self.m_iMinBreakPoint,
-            "MaxBreakPoint": self.m_iMaxBreakPoint,
-            "WincePoint": self.m_iWincePoint,
-            "OmegaDrivePoint": self.m_iOmegaDrivePoint,
-            "OmegaDrivePointByWeakPoint": self.m_iOmegaDrivePointByWeakPoint,
-            "MinAttackPower": self.m_iMinAttackPower,
-            "MaxAttackPower": self.m_iMaxAttackPower,
-            "ElementalType1": self.m_eElementalType1.value,
-            "MinElementalPower1": self.m_iMinElementalPower1,
-            "MaxElementalPower1": self.m_iMaxElementalPower1,
-            "ElementalType2": self.m_eElementalType2.value,
-            "MinElementalPower2": self.m_iMinElementalPower2,
-            "MaxElementalPower2": self.m_iMaxElementalPower2,
-            "ElementalType3": self.m_eElementalType3.value,
-            "MinElementalPower3": self.m_iMinElementalPower3,
-            "MaxElementalPower3": self.m_iMaxElementalPower3,
-            "AttackId": self.m_iAttackId,
-            "AttackActionIds": self.m_arrAttackActionIds,
-            "AdditionalEffectIds": self.m_arrAdditionalEffectIds,
-            "BulletIds": self.m_arrBulletIds
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "statusId": self.m_iPlayerSkillStatusId,
+            "playerSkillId": self.m_iPlayerSkillId,
+            "rank": self.m_iRank,
+            "consumedSp": self.m_iConsumedSp,
+            "recoveredSp": self.m_iRecoveredSp,
+            "breakPoint": self.m_iBreakPoint,
+            "minBreakPoint": self.m_iMinBreakPoint,
+            "maxBreakPoint": self.m_iMaxBreakPoint,
+            "wincePoint": self.m_iWincePoint,
+            "omegaDrivePoint": self.m_iOmegaDrivePoint,
+            "omegaDrivePointByWeakPoint": self.m_iOmegaDrivePointByWeakPoint,
+            "minAttackPower": self.m_iMinAttackPower,
+            "maxAttackPower": self.m_iMaxAttackPower,
+            "elementalType1": self.m_eElementalType1.value,
+            "minElementalPower1": self.m_iMinElementalPower1,
+            "maxElementalPower1": self.m_iMaxElementalPower1,
+            "elementalType2": self.m_eElementalType2.value,
+            "minElementalPower2": self.m_iMinElementalPower2,
+            "maxElementalPower2": self.m_iMaxElementalPower2,
+            "elementalType3": self.m_eElementalType3.value,
+            "minElementalPower3": self.m_iMinElementalPower3,
+            "maxElementalPower3": self.m_iMaxElementalPower3,
+            "attackId": self.m_iAttackId,
+            "attackActionIds": self.m_arrAttackActionIds,
+            "additionalEffectIds": self.m_arrAdditionalEffectIds,
+            "bulletIds": self.m_arrBulletIds
+        }

@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.classes.CWeaponModel import CWeaponModel
@@ -54,31 +54,31 @@ class CFixedDataSetModel(CTypeImplBaseClass):
     m_arrBulletModel: list[CBulletModel]
     m_arrMasterPartialDataModel: list[CMasterPartialDataModel]
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "Weapons": [weapon.toJSON() for weapon in self.m_arrWeapons],
-            "Accessories": [accessory.toJSON() for accessory in self.m_arrAccessoryModel],
-            "MountMonsters": [mount.toJSON() for mount in self.m_arrMountMonsterModel],
-            "OptionsMonsters": [option.toJSON() for option in self.m_arrOptionsMonsterModel],
-            "Materials": [material.toJSON() for material in self.m_arrMaterialModel],
-            "UtilityTickets": [ticket.toJSON() for ticket in self.m_arrUtilityTickets],
-            "PlayableCharacters": [character.toJSON() for character in self.m_arrPlayableCharacterModel],
-            "Stamps": [stamp.toJSON() for stamp in self.m_arrStampModel],
-            "QuestOnlyItems": [item.toJSON() for item in self.m_arrQuestOnlyItemModel],
-            "Emblems": [emblem.toJSON() for emblem in self.m_arrEmblemModel],
-            "MountMonsterEggs": [egg.toJSON() for egg in self.m_arrMountMonsterEggModel],
-            "FarmBuildings": [building.toJSON() for building in self.m_arrFarmBuildingModel],
-            "ItemRecipes": [recipe.toJSON() for recipe in self.m_arrItemRecipeModel],
-            "Monsters": [monster.toJSON() for monster in self.m_arrMonsterModel],
-            "Characters": [character.toJSON() for character in self.m_arrCharacterModel],
-            "CharacterProfiles": [profile.toJSON() for profile in self.m_arrCharacterProfileModel],
-            "PlayerSkills": [skill.toJSON() for skill in self.m_arrPlayerSkillModel],
-            "PlayerTapSkills": [skill.toJSON() for skill in self.m_arrPlayerTapSkillModel],
-            "PlayerStepSkills": [skill.toJSON() for skill in self.m_arrPlayerStepSkillModel],
-            "OptionMonsterSkills": [skill.toJSON() for skill in self.m_arrOptionMonsterSkillModel],
-            "PassiveSkills": [skill.toJSON() for skill in self.m_arrPassiveSkillModel],
-            "FarmBuildingUpgrades": [upgrade.toJSON() for upgrade in self.m_arrFarmBuildingUpgradeModel],
-            "Hates": [hate.toJSON() for hate in self.m_arrHateModel],
-            "Bullets": [bullet.toJSON() for bullet in self.m_arrBulletModel],
-            "MasterPartialData": [data.toJSON() for data in self.m_arrMasterPartialDataModel]
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "weapons": [weapon.toJSON() for weapon in self.m_arrWeapons],
+            "accessories": [accessory.toJSON() for accessory in self.m_arrAccessoryModel],
+            "mountMonsters": [mount.toJSON() for mount in self.m_arrMountMonsterModel],
+            "optionMonsters": [option.toJSON() for option in self.m_arrOptionsMonsterModel],
+            "materials": [material.toJSON() for material in self.m_arrMaterialModel],
+            "utilityTickets": [ticket.toJSON() for ticket in self.m_arrUtilityTickets],
+            "playableCharacters": [character.toJSON() for character in self.m_arrPlayableCharacterModel],
+            "stamps": [stamp.toJSON() for stamp in self.m_arrStampModel],
+            "questOnlyItems": [item.toJSON() for item in self.m_arrQuestOnlyItemModel],
+            "emblems": [emblem.toJSON() for emblem in self.m_arrEmblemModel],
+            "mountMonsterEggs": [egg.toJSON() for egg in self.m_arrMountMonsterEggModel],
+            "farmBuildings": [building.toJSON() for building in self.m_arrFarmBuildingModel],
+            "itemRecipes": [recipe.toJSON() for recipe in self.m_arrItemRecipeModel],
+            "monsters": [monster.toJSON() for monster in self.m_arrMonsterModel],
+            "characters": [character.toJSON() for character in self.m_arrCharacterModel],
+            "characterProfiles": [profile.toJSON() for profile in self.m_arrCharacterProfileModel],
+            "playerSkills": [skill.toJSON() for skill in self.m_arrPlayerSkillModel],
+            "playerTapSkills": [skill.toJSON() for skill in self.m_arrPlayerTapSkillModel],
+            "playerStepSkills": [skill.toJSON() for skill in self.m_arrPlayerStepSkillModel],
+            "optionMonsterSkills": [skill.toJSON() for skill in self.m_arrOptionMonsterSkillModel],
+            "passiveSkills": [skill.toJSON() for skill in self.m_arrPassiveSkillModel],
+            "farmBuildingUpgrades": [upgrade.toJSON() for upgrade in self.m_arrFarmBuildingUpgradeModel],
+            "hates": [hate.toJSON() for hate in self.m_arrHateModel],
+            "bullets": [bullet.toJSON() for bullet in self.m_arrBulletModel],
+            "masterPartialData": [data.toJSON() for data in self.m_arrMasterPartialDataModel]
+        }

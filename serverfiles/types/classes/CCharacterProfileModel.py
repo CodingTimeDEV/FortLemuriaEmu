@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EGender import EGender
@@ -13,13 +13,13 @@ class CCharacterProfileModel(CTypeImplBaseClass):
     m_iPersonality: int
     m_strAmmoName: str
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "CharacterProfileId": self.m_iCharacterProfileId,
-            "Name": self.m_strName,
-            "Gender": self.m_eGender.name,
-            "BodyShape": self.m_eBodyShape.name,
-            "Voice": self.m_strVoice,
-            "Personality": self.m_iPersonality,
-            "AmmoName": self.m_strAmmoName
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "characterProfileId": self.m_iCharacterProfileId,
+            "name": self.m_strName,
+            "gender": self.m_eGender.name,
+            "bodyShape": self.m_eBodyShape.name,
+            "voice": self.m_strVoice,
+            "personality": self.m_iPersonality,
+            "ammoName": self.m_strAmmoName
+        }

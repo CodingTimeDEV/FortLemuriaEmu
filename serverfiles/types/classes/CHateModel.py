@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
 class CHateModel(CTypeImplBaseClass):
@@ -13,16 +13,16 @@ class CHateModel(CTypeImplBaseClass):
     m_iTargetDown: int
     m_iAttackHitDown: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "HateId": self.m_iHateId,
-            "Description": self.m_szDescription,
-            "BasePoint": self.m_iBasePoint,
-            "AttackUp": self.m_iAttackUp,
-            "DebuffUp": self.m_iDebuffUp,
-            "HealUp": self.m_iHealUp,
-            "BuffUp": self.m_iBuffUp,
-            "TimeDown": self.m_iTimeDown,
-            "TargetDown": self.m_iTargetDown,
-            "AttackHitDown": self.m_iAttackHitDown
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "hateId": self.m_iHateId,
+            "description": self.m_szDescription,
+            "basePoint": self.m_iBasePoint,
+            "attackUp": self.m_iAttackUp,
+            "debuffUp": self.m_iDebuffUp,
+            "healUp": self.m_iHealUp,
+            "buffUp": self.m_iBuffUp,
+            "timeDown": self.m_iTimeDown,
+            "targetDown": self.m_iTargetDown,
+            "attackHitDown": self.m_iAttackHitDown
+        }

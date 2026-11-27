@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EFarmMotionType import EFarmMotionType
 
@@ -11,13 +11,13 @@ class CFarmBuildingModel(CTypeImplBaseClass):
     m_iPreviewMountMonsterId: int
     m_iMaxLevel: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "FarmBuildingId": self.m_iFarmBuildingId,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "PrefabName": self.m_strPrefabName,
-            "FarmMotionType": self.m_eFarmMotionType.value,
-            "PreviewMountMonsterId": self.m_iPreviewMountMonsterId,
-            "MaxLevel": self.m_iMaxLevel
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "farmBuildingId": self.m_iFarmBuildingId,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "prefabName": self.m_strPrefabName,
+            "farmMotionType": self.m_eFarmMotionType.value,
+            "previewMountMonsterId": self.m_iPreviewMountMonsterId,
+            "maxLevel": self.m_iMaxLevel
+        }

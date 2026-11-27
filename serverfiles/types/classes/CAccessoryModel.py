@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.ERarity import ERarity
@@ -23,24 +23,24 @@ class CAccessoryModel(CTypeImplBaseClass):
     m_iPassiveSkill2Id: int
     m_iPassiveSkill3Id: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "AccessoryID": self.m_iAccessoryID,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "Rarity": self.m_eRarity.value,
-            "SubRarity": self.m_eSubRarity.value,
-            "IconId": self.m_iIconId,
-            "MonsterModelId": self.m_iMonsterModelId,
-            "EffectId": self.m_iEffectId,
-            "Price": self.m_iPrice,
-            "Hp": self.m_iHP,
-            "Sp": self.m_iSP,
-            "Attack": self.m_iAttack,
-            "PhysicalDefense": self.m_iPhysDefense,
-            "MagicalDefense": self.m_iMagicDefense,
-            "PassiveSkillIds": self.m_arrPassiveSkillIds,
-            "PassiveSkill1Id": self.m_iPassiveSkill1Id,
-            "PassiveSkill2Id": self.m_iPassiveSkill2Id,
-            "PassiveSkill3Id": self.m_iPassiveSkill3Id
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "accessoryID": self.m_iAccessoryID,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "rarity": self.m_eRarity.value,
+            "subRarity": self.m_eSubRarity.value,
+            "iconId": self.m_iIconId,
+            "monsterModelId": self.m_iMonsterModelId,
+            "effectId": self.m_iEffectId,
+            "price": self.m_iPrice,
+            "hp": self.m_iHP,
+            "sp": self.m_iSP,
+            "attack": self.m_iAttack,
+            "physicalDefense": self.m_iPhysDefense,
+            "magicalDefense": self.m_iMagicDefense,
+            "passiveSkillIds": self.m_arrPassiveSkillIds,
+            "passiveSkill1Id": self.m_iPassiveSkill1Id,
+            "passiveSkill2Id": self.m_iPassiveSkill2Id,
+            "passiveSkill3Id": self.m_iPassiveSkill3Id
+        }

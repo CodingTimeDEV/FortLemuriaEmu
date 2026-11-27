@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
 class CStampModel(CTypeImplBaseClass):
@@ -9,13 +9,13 @@ class CStampModel(CTypeImplBaseClass):
     m_strImage: str
     m_strSeName: str
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "StampId": self.m_iStampId,
-            "Name": self.m_strName,
-            "Description": self.m_strDescription,
-            "Text": self.m_strText,
-            "Image": self.m_strImage,
-            "SeName": self.m_strSeName
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "stampId": self.m_iStampId,
+            "name": self.m_strName,
+            "description": self.m_strDescription,
+            "text": self.m_strText,
+            "image": self.m_strImage,
+            "seName": self.m_strSeName
+        }
     

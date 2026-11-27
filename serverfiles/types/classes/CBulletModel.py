@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
 class CBulletModel(CTypeImplBaseClass):
@@ -6,9 +6,9 @@ class CBulletModel(CTypeImplBaseClass):
     m_szName: str
     m_arrAttackActionIds: list[int]
 
-    def toJSON(self):
-        return json.dumps({
-            "BulletId": self.m_iBulletId,
-            "Name": self.m_szName,
-            "AttackActionIds": self.m_arrAttackActionIds
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "bulletId": self.m_iBulletId,
+            "name": self.m_szName,
+            "attackActionIds": self.m_arrAttackActionIds
+        }

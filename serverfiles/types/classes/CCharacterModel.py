@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
@@ -15,17 +15,17 @@ class CCharacterModel(CTypeImplBaseClass):
     m_iDefaultWeaponId: int
     m_bIsPlayable: bool
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "CharacterId": self.m_iCharacterId,
-            "Name": self.m_strName,
-            "AnotherName": self.m_strAnotherName,
-            "MkName": self.m_strMkName,
-            "CharacterProfileId": self.m_iCharacterProfileId,
-            "ModelId": self.m_iModelId,
-            "SequenceId": self.m_iSeqId,
-            "MotionListAssetName": self.m_strMotionListAssetName,
-            "IconId": self.m_iIconId,
-            "DefaultWeaponId": self.m_iDefaultWeaponId,
-            "IsPlayable": self.m_bIsPlayable
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "characterId": self.m_iCharacterId,
+            "name": self.m_strName,
+            "anotherName": self.m_strAnotherName,
+            "mkName": self.m_strMkName,
+            "characterProfileId": self.m_iCharacterProfileId,
+            "modelId": self.m_iModelId,
+            "sequenceId": self.m_iSeqId,
+            "motionListAssetName": self.m_strMotionListAssetName,
+            "iconId": self.m_iIconId,
+            "defaultWeaponId": self.m_iDefaultWeaponId,
+            "isPlayable": self.m_bIsPlayable
+        }

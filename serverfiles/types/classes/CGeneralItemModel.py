@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.EGeneralItemType import EGeneralItemType
 
@@ -8,10 +8,10 @@ class CGeneralItemModel(CTypeImplBaseClass):
     m_iCount: int
     m_strParam: str
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "GeneralItemType": self.m_eGeneralItemType.value,
-            "Id": self.m_iId,
-            "Count": self.m_iCount,
-            "Param": self.m_strParam
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "generalItemType": self.m_eGeneralItemType.value,
+            "id": self.m_iId,
+            "count": self.m_iCount,
+            "param": self.m_strParam
+        }

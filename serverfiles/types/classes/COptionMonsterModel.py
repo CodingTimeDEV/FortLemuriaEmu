@@ -1,8 +1,7 @@
-import json
-
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.ERarity import ERarity
-from serverfiles.types.enums.EOptionsMonsterRole import EOptionsMonsterRole
+from serverfiles.types.enums.EOptionMonsterRole import EOptionMonsterRole
 from serverfiles.types.enums.EElementalType import EElementalType
 from serverfiles.types.classes.COptionMonsterAiModel import COptionMonsterAiModel
 
@@ -15,7 +14,7 @@ class COptionMonsterModel(CTypeImplBaseClass):
     m_eRarity: ERarity
     m_flRadius: float
     m_flScaleFactor: float
-    m_eRole: EOptionsMonsterRole
+    m_eRole: EOptionMonsterRole
     m_iPrice: int
     m_iBaseAttack: int
     m_eElementalType: EElementalType
@@ -25,23 +24,23 @@ class COptionMonsterModel(CTypeImplBaseClass):
     m_iHateId: int
     m_OptionMonsterAiModel: COptionMonsterAiModel
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "OptionMonsterId": self.m_iOptionMonsterId,
-            "Name": self.m_strName,
-            "Index": self.m_iIndex,
-            "MonsterId": self.m_iMonsterId,
-            "IconId": self.m_iIconId,
-            "Rarity": self.m_eRarity.value,
-            "Radius": self.m_flRadius,
-            "ScaleFactor": self.m_flScaleFactor,
-            "Role": self.m_eRole.value,
-            "Price": self.m_iPrice,
-            "BaseAttack": self.m_iBaseAttack,
-            "ElementalType": self.m_eElementalType.value,
-            "BaseElementalPoint": self.m_iBaseElementalPoint,
-            "BaseEvaluation": self.m_iBaseEvaluation,
-            "OptionMonsterSkillId": self.m_iOptionMonsterSkillId,
-            "HateId": self.m_iHateId,
-            "OptionMonsterAiModel": self.m_OptionMonsterAiModel.toJSON()
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "optionMonsterId": self.m_iOptionMonsterId,
+            "name": self.m_strName,
+            "index": self.m_iIndex,
+            "monsterId": self.m_iMonsterId,
+            "iconId": self.m_iIconId,
+            "rarity": self.m_eRarity.value,
+            "radius": self.m_flRadius,
+            "scaleFactor": self.m_flScaleFactor,
+            "role": self.m_eRole.value,
+            "price": self.m_iPrice,
+            "baseAttack": self.m_iBaseAttack,
+            "elementalType": self.m_eElementalType.value,
+            "baseElementalPoint": self.m_iBaseElementalPoint,
+            "baseEvaluation": self.m_iBaseEvaluation,
+            "optionMonsterSkillId": self.m_iOptionMonsterSkillId,
+            "hateId": self.m_iHateId,
+            "optionMonsterAiModel": self.m_OptionMonsterAiModel.toJSON()
+        }

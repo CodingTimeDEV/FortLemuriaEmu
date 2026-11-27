@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.enums.EMountType import EMountType
 from serverfiles.types.classes.CPlayerSkillModel import CPlayerSkillModel
 
@@ -8,10 +8,10 @@ class CPlayerTapSkillModel(CPlayerSkillModel):
     m_EMountType: EMountType
     m_iNo: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "PlayerTapSkillId": self.m_iPlayerTapSkillId,
-            "PlayerSkillId": self.m_iPlayerSkillId,
-            "MountType": self.m_EMountType.value,
-            "No": self.m_iNo
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "playerTapSkillId": self.m_iPlayerTapSkillId,
+            "playerSkillId": self.m_iPlayerSkillId,
+            "mountType": self.m_EMountType.value,
+            "no": self.m_iNo
+        }

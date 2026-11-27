@@ -1,4 +1,4 @@
-import json
+from typing import Any
 
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.enums.ERarity import ERarity
@@ -25,23 +25,23 @@ class CWeaponModel(CTypeImplBaseClass):
     m_iColorId: int
     m_iShaderId: int
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "WeaponID": self.m_iWeaponID,
-            "Name": self.m_strWeaponName,
-            "Rarity": self.m_eRarity.value,
-            "SubRarity": self.m_eSubRarity.value,
-            "Description": self.m_strDescription,
-            "WeaponType": self.m_eWeaponType.value,
-            "Use": self.m_eWeaponUse.value,
-            "Attack": self.m_iAttackPower,
-            "ElementalPoint": self.m_iElementalPoint,
-            "ElementalType": self.m_eElementalType.value,
-            "PassiveSkillIds": self.m_arrPassiveSkillIds,
-            "Price": self.m_iPrice,
-            "MinPrice": self.m_iMinPrice,
-            "MaxPrice": self.m_iMaxPrice,
-            "ModelId": self.m_iModelId,
-            "ColorId": self.m_iColorId,
-            "ShaderId": self.m_iShaderId
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "weaponID": self.m_iWeaponID,
+            "name": self.m_strWeaponName,
+            "rarity": self.m_eRarity.value,
+            "subRarity": self.m_eSubRarity.value,
+            "description": self.m_strDescription,
+            "weaponType": self.m_eWeaponType.value,
+            "use": self.m_eWeaponUse.value,
+            "attack": self.m_iAttackPower,
+            "elementalPoint": self.m_iElementalPoint,
+            "elementalType": self.m_eElementalType.value,
+            "passiveSkillIds": self.m_arrPassiveSkillIds,
+            "price": self.m_iPrice,
+            "minPrice": self.m_iMinPrice,
+            "maxPrice": self.m_iMaxPrice,
+            "modelId": self.m_iModelId,
+            "colorId": self.m_iColorId,
+            "shaderId": self.m_iShaderId
+        }

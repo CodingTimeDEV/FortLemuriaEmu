@@ -1,4 +1,4 @@
-import json
+from typing import Any
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.classes.CFarmEffectModel import CFarmEffectModel
 from serverfiles.types.classes.CGeneralItemModel import CGeneralItemModel
@@ -10,11 +10,11 @@ class CFarmBuildingUpgradeModel(CTypeImplBaseClass):
     m_arrFarmEffects: list[CFarmEffectModel]
     m_arrUpgradeSourceItems: list[CGeneralItemModel]
 
-    def toJSON(self) -> str:
-        return json.dumps({
-            "FarmBuildingUpgradeId": self.m_iFarmBuildingUpgradeId,
-            "FarmBuildingId": self.m_iFarmBuildingId,
-            "Level": self.m_iLevel,
-            "Effects": [effect.toJSON() for effect in self.m_arrFarmEffects],
-            "UpgradeSourceItems": [item.toJSON() for item in self.m_arrUpgradeSourceItems]
-        })
+    def toJSON(self) -> dict[str, Any]:
+        return {
+            "farmBuildingUpgradeId": self.m_iFarmBuildingUpgradeId,
+            "farmBuildingId": self.m_iFarmBuildingId,
+            "level": self.m_iLevel,
+            "effects": [effect.toJSON() for effect in self.m_arrFarmEffects],
+            "upgradeSourceItems": [item.toJSON() for item in self.m_arrUpgradeSourceItems]
+        }
