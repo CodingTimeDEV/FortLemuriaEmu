@@ -52,7 +52,7 @@ class CFixedDataSetModel(CTypeImplBaseClass):
     m_arrFarmBuildingUpgradeModel: list[CFarmBuildingUpgradeModel]
     m_arrHateModel: list[CHateModel]
     m_arrBulletModel: list[CBulletModel]
-    m_arrMasterPartialDataModel: list[CMasterPartialDataModel]
+    m_MasterPartialDataModel: CMasterPartialDataModel
 
     def toJSON(self) -> dict[str, Any]:
         return {
@@ -80,5 +80,5 @@ class CFixedDataSetModel(CTypeImplBaseClass):
             "farmBuildingUpgrades": [upgrade.toJSON() for upgrade in self.m_arrFarmBuildingUpgradeModel],
             "hates": [hate.toJSON() for hate in self.m_arrHateModel],
             "bullets": [bullet.toJSON() for bullet in self.m_arrBulletModel],
-            "masterPartialData": [data.toJSON() for data in self.m_arrMasterPartialDataModel]
+            "masterPartialData": self.m_MasterPartialDataModel.toJSON()
         }
