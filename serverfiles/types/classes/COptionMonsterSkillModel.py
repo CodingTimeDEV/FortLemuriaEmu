@@ -1,9 +1,12 @@
 from typing import Any
-from serverfiles.types.enums.EAttackType import EAttackType
-from serverfiles.types.enums.EElementalType import EElementalType
+
+from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 from serverfiles.types.classes.COptionMonsterSkillStatusModel import COptionMonsterSkillStatusModel
 
-class COptionMonsterSkillModel:
+from serverfiles.types.enums.EAttackType import EAttackType
+from serverfiles.types.enums.EElementalType import EElementalType
+
+class COptionMonsterSkillModel(CTypeImplBaseClass   ):
     m_iOptionMonsterSkillId: int
     m_szName: str
     m_szDescription: str
