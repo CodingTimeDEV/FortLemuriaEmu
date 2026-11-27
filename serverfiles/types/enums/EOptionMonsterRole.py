@@ -1,6 +1,6 @@
 from enum import Enum
 
-class EOptionsMonsterRole(Enum):
+class EOptionMonsterRole(Enum):
     Attacker = 1
     Tanker = 2
     Healer = 3
