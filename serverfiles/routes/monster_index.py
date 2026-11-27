@@ -1,6 +1,15 @@
 """Handlers for /api/monster-index/* endpoints."""
 from serverfiles import skel
 
+from serverfiles.types.classes.CCommonResourceModel import CCommonResourceModel
+from serverfiles.types.classes.CMonsterIndexOptionMonsterResponse import CMonsterIndexOptionMonsterResponse
+from serverfiles.types.classes.CMonsterThumbnailModel import CMonsterThumbnailModel
+from serverfiles.types.classes.COptionMonsterThumbnailModel import COptionMonsterThumbnailModel
+
+from serverfiles.types.enums.EMonsterIndexStatus import EMonsterIndexStatus
+from serverfiles.types.enums.EOptionMonsterRole import EOptionMonsterRole
+from serverfiles.types.enums.EElementalType import EElementalType
+
 from . import register
 
 # Req body: {}
@@ -84,27 +93,31 @@ def mountMonsterDetail(q, b):
 
 # Req body: {}
 def optionMonster(q, b):
-    return {
-        "commonResource":{
-                    "subNotifications":[],
-                    "badges":[]
-        },
-        "thumbnails": [ # Array of "OptionMonsterThumbnailModel : Model, IHasMonsterIndexStatus, IHasSortFilterTargetModel, IHasMonsterIndexNoSortStrategyValue, IHasOptionMonsterRole, IHasElementalType"
-            {
-                "indexNo": 1,
-                "optionMonsterId": 101001610,
-                "elementalType": 1, # Derived
-                "optionMonsterRole": 1, # Derived
-                "monsterThumbnail": {
-                    "monsterId": 101001610,
-                    "name": "MockMonster",
-                    "iconId": 101001610,
-                    "monsterIndexStatus": 4,
-                    "monsterModelId": 1
-                }
-            }
-        ]
-    }
+    commonResource: CCommonResourceModel = CCommonResourceModel()
+    commonResource.m_SubNotifications = []
+    commonResource.m_Badges = []
+
+    monsterThumbnail = CMonsterThumbnailModel()
+    monsterThumbnail.m_iMonsterId = 101001610
+    monsterThumbnail.m_szName = "MockMonster"
+    monsterThumbnail.m_iIconId = 101001610
+    monsterThumbnail.m_eMonsterIndexStatus = EMonsterIndexStatus.Obtained
+    monsterThumbnail.m_iMonsterModelId = 1
+
+    thumbnails: list[COptionMonsterThumbnailModel] = []
+    thumbnail = COptionMonsterThumbnailModel()
+    thumbnail.m_iIndexNo = 1
+    thumbnail.m_iOptionMonsterId = 101001610
+    thumbnail.m_eElementalType = EElementalType.Fire
+    thumbnail.m_eOptionMonsterRole = EOptionMonsterRole.Attacker
+    thumbnail.m_MonsterThumbnail = monsterThumbnail
+    thumbnails.append(thumbnail)
+
+    optionMonsterResponse = CMonsterIndexOptionMonsterResponse()
+    optionMonsterResponse.m_CommonResource = commonResource
+    optionMonsterResponse.m_Thumbnails = thumbnails
+
+    return optionMonsterResponse.toJSON()
 
 # Req body: {"optionMonsterId": <long>}
 def optionMonsterDetail(q, b):
