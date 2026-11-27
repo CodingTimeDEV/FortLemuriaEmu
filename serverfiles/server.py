@@ -89,7 +89,7 @@ class MockHandler(BaseHTTPRequestHandler):
         data = msgpack.packb(out, use_bin_type=True)
         self.send_response(code)
         self.send_header("Content-Type", "application/msgpack")
-        if u.path == "/api/quest/enter":
+        if u.path == "/api/quest/enter" or u.path == "/api/monster-index/top":
             self.send_header("AssetBundle-Manifest", "local_latest")
         self.send_header("Content-Length", str(len(data)))
         self.send_header("x-server-time", str(now()))

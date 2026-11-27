@@ -24,3 +24,5 @@ from . import quest       # noqa: E402, F401
 from . import farm        # noqa: E402, F401
 from . import data        # noqa: E402, F401
 from . import misc        # noqa: E402, F401
+from . import monster_index
+
