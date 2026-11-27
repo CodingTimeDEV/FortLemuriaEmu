@@ -8,10 +8,10 @@ from serverfiles.types.enums.EElementalType import EElementalType
 
 class CWeaponModel(CTypeImplBaseClass):
     m_iWeaponID: int
-    m_strWeaponName: str
+    m_szWeaponName: str
     m_eRarity: ERarity
     m_eSubRarity: ERarity
-    m_strDescription: str
+    m_szDescription: str
     m_eWeaponType: EWeaponType
     m_eWeaponUse: EWeaponUse
     m_iAttackPower: int
@@ -27,11 +27,11 @@ class CWeaponModel(CTypeImplBaseClass):
 
     def toJSON(self) -> dict[str, Any]:
         return {
-            "weaponID": self.m_iWeaponID,
-            "name": self.m_strWeaponName,
+            "weaponId": self.m_iWeaponID,
+            "name": self.m_szWeaponName,
             "rarity": self.m_eRarity.value,
             "subRarity": self.m_eSubRarity.value,
-            "description": self.m_strDescription,
+            "description": self.m_szDescription,
             "weaponType": self.m_eWeaponType.value,
             "use": self.m_eWeaponUse.value,
             "attack": self.m_iAttackPower,
