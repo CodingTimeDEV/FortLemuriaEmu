@@ -88,3 +88,6 @@ htmlcov/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+docs/dump_index.md
+docs/boot_analysis.md
