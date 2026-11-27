@@ -38,15 +38,15 @@ class CPlayableCharacterModel(CTypeImplBaseClass):
     m_szGachaResultQuote: str
     m_bHasSpecialGachaResultPerformance: bool
     m_iLevelUpMotionClipNo: int
-    m_TrainablePassiveSkills: list[CPassiveSkillTrainingModel]
-    m_iCharacterShopVoiceIds: list[int]
+    m_arrTrainablePassiveSkills: list[CPassiveSkillTrainingModel]
+    m_arrCharacterShopVoiceIds: list[int]
     m_iTrainingHp: int
     m_iTrainingSp: int
     m_iTrainingAttack: int
     m_iTrainingPhysicalDefense: int
     m_iTrainingMagicalDefense: int
     m_iTrainingElementalPoint: int
-    m_iFarmSkillIds: list[int]
+    m_arrFarmSkillIds: list[int]
 
     def toJSON(self) -> dict[str, Any]:
         return {
@@ -82,13 +82,13 @@ class CPlayableCharacterModel(CTypeImplBaseClass):
             "gachaResultQuote": self.m_szGachaResultQuote,
             "hasSpecialGachaResultPerformance": self.m_bHasSpecialGachaResultPerformance,
             "levelUpMotionClipNo": self.m_iLevelUpMotionClipNo,
-            "trainablePassiveSkills": [skill.toJSON() for skill in self.m_TrainablePassiveSkills],
-            "characterShopVoiceIds": self.m_iCharacterShopVoiceIds,
+            "trainablePassiveSkills": [skill.toJSON() for skill in self.m_arrTrainablePassiveSkills],
+            "characterShopVoiceIds": self.m_arrCharacterShopVoiceIds,
             "trainingHp": self.m_iTrainingHp,
             "trainingSp": self.m_iTrainingSp,
             "trainingAttack": self.m_iTrainingAttack,
             "trainingPhysicalDefense": self.m_iTrainingPhysicalDefense,
             "trainingMagicalDefense": self.m_iTrainingMagicalDefense,
             "trainingElementalPoint": self.m_iTrainingElementalPoint,
-            "farmSkillIds": self.m_iFarmSkillIds
+            "farmSkillIds": self.m_arrFarmSkillIds
         }
