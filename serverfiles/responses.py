@@ -1,7 +1,7 @@
 """Shared response builders used across multiple routes."""
+from typing import Any
+
 import msgpack
-
-
 from .config import (
     SKIP_PROLOGUE,
     MOCK_CHARACTER_ID,
@@ -12,6 +12,11 @@ from . import skel
 from .users import cur, uid, uname, update_user
 from .utils import now
 
+from serverfiles.types.classes.CCharacterModel import CCharacterModel
+from serverfiles.types.classes.CCharacterProfileModel import CCharacterProfileModel
+
+from serverfiles.types.enums.EGender import EGender
+from serverfiles.types.enums.ECharacterBodyShape import ECharacterBodyShape
 
 def mock_user_flags() -> list:
     return (
@@ -131,21 +136,30 @@ def ensure_registered() -> None:
         )
 
 
-def mock_character() -> dict:
-    c = skel.default("CharacterModel")
-    c.update(
-        characterId=MOCK_CHARACTER_ID,
-        name="Mock",
-        characterProfileId=1,
-        modelId=15,
-        motionListAssetName="h_025001_uniq_m",
-        isPlayable=True,
-        defaultWeaponId=1,
-    )
-    return c
+def mock_character() -> CCharacterModel:
+    CharacterModel: CCharacterModel = CCharacterModel()
+    CharacterModel.m_iCharacterId = MOCK_CHARACTER_ID
+    CharacterModel.m_szName = "Mock"
+    CharacterModel.m_szAnotherName = ""
+    CharacterModel.m_szMkName = ""
+    CharacterModel.m_iCharacterProfileId = 1
+    CharacterModel.m_iModelId = 15
+    CharacterModel.m_iSeqId = 0
+    CharacterModel.m_szMotionListAssetName = "h_025001_uniq_m"
+    CharacterModel.m_iIconId = 0
+    CharacterModel.m_iDefaultWeaponId = 1
+    CharacterModel.m_bIsPlayable = True
 
+    return CharacterModel
 
-def mock_character_profile() -> dict:
-    p = skel.default("CharacterProfileModel")
-    p.update(characterProfileId=1, name="Mock")
-    return p
+def mock_character_profile() -> CCharacterProfileModel:
+    CharacterProfileModel: CCharacterProfileModel = CCharacterProfileModel()
+    CharacterProfileModel.m_iCharacterProfileId = 1
+    CharacterProfileModel.m_szName = "Mock"
+    CharacterProfileModel.m_eGender = EGender.Other
+    CharacterProfileModel.m_eBodyShape = ECharacterBodyShape.Middle
+    CharacterProfileModel.m_szVoice = ""
+    CharacterProfileModel.m_iPersonality = 0
+    CharacterProfileModel.m_szAmmoName = ""
+
+    return CharacterProfileModel

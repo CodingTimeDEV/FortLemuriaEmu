@@ -24,10 +24,10 @@ def _farm_top(q, b):
 
     h = d["homeDataSet"]
     h.update(
-        farmCharacter=mock_character(),
-        farmCharacterProfile=mock_character_profile(),
-        questCharacter=mock_character(),
-        questCharacterProfile=mock_character_profile(),
+        farmCharacter=mock_character().toJSON(),
+        farmCharacterProfile=mock_character_profile().toJSON(),
+        questCharacter=mock_character().toJSON(),
+        questCharacterProfile=mock_character_profile().toJSON(),
     )
     return d
 
