@@ -1,5 +1,6 @@
 from typing import Any
 
+import msgpack
 from msgpack import Timestamp
 from serverfiles.types.classes.CTypeImplBaseClass import CTypeImplBaseClass
 
@@ -10,5 +11,5 @@ class CMasterPartialDataModel(CTypeImplBaseClass):
     def toJSON(self) -> dict[str, Any]:
         return {
             "id": self.m_iId,
-            "lastOriginalRankingQuestScheduleEndAt": self.m_LastOriginalRankingQuestScheduleEndAt
+            "lastOriginalRankingQuestScheduleEndAt": msgpack.Timestamp(self.m_LastOriginalRankingQuestScheduleEndAt.seconds)
         }
